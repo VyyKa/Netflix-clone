@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix - Watch</title>
+    <link rel="icon" type="image/x-icon" href="https://assets.nflxext.com/us/ffe/siteui/common/icons/nficon2016.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-black text-white font-['Roboto']">
+    <!-- Video Player Container -->
+    <div class="relative h-screen">
+        <!-- Back Button -->
+        <a href="browse.html" class="absolute top-8 left-8 z-50 bg-black/50 p-3 rounded-full hover:bg-black/70 transition-colors">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+        <!-- Video Player -->
+        <div class="relative h-full">
+            <video id="video-player" class="w-full h-full object-contain">
+                <source src="https://assets.nflxext.com/ffe/siteui/acquisition/ourStory/fuji/desktop/video-tv-0819.m4v" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+
+            <!-- Video Controls -->
+            <div id="video-controls" class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-4 opacity-0 hover:opacity-100 transition-opacity">
+                <!-- Progress Bar -->
+                <div class="relative w-full h-1 bg-gray-600 cursor-pointer mb-4" id="progress-bar">
+                    <div class="absolute h-full bg-red-600" id="progress" style="width: 0%"></div>
+                    <div class="absolute h-3 w-3 bg-red-600 rounded-full -top-1 hidden" id="progress-handle"></div>
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <!-- Left Controls -->
+                    <div class="flex items-center space-x-4">
+                        <button id="play-pause" class="hover:text-gray-300">
+                            <i class="fas fa-play text-2xl"></i>
+                        </button>
+                        <button id="rewind" class="hover:text-gray-300">
+                            <i class="fas fa-backward text-xl"></i>
+                        </button>
+                        <button id="forward" class="hover:text-gray-300">
+                            <i class="fas fa-forward text-xl"></i>
+                        </button>
+                        <div class="flex items-center space-x-2">
+                            <button id="volume" class="hover:text-gray-300">
+                                <i class="fas fa-volume-up text-xl"></i>
+                            </button>
+                            <div class="relative w-24 h-1 bg-gray-600 cursor-pointer" id="volume-bar">
+                                <div class="absolute h-full bg-white" id="volume-level" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        <div class="text-sm">
+                            <span id="current-time">0:00</span>
+                            <span>/</span>
+                            <span id="duration">0:00</span>
+                        </div>
+                    </div>
+
+                    <!-- Right Controls -->
+                    <div class="flex items-center space-x-4">
+                        <button id="subtitles" class="hover:text-gray-300">
+                            <i class="fas fa-closed-captioning text-xl"></i>
+                        </button>
+                        <button id="settings" class="hover:text-gray-300">
+                            <i class="fas fa-cog text-xl"></i>
+                        </button>
+                        <button id="fullscreen" class="hover:text-gray-300">
+                            <i class="fas fa-expand text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Episode Selection (for TV Shows) -->
+        <div id="episodes-panel" class="absolute top-0 right-0 bottom-0 w-96 bg-black/90 transform translate-x-full transition-transform duration-300 overflow-y-auto">
+            <div class="p-6">
+                <h2 class="text-2xl font-bold mb-4">The Witcher</h2>
+                <h3 class="text-lg text-gray-400 mb-6">Season 1</h3>
+                
+                <div class="space-y-4">
+                    <!-- Episode Items -->
+                    <div class="flex space-x-4 cursor-pointer hover:bg-white/10 p-2 rounded transition-colors">
+                        <img src="https://image.tmdb.org/t/p/w500/uDgy6hyPd82kOHh6I95FLtLnj6p.jpg" 
+                             alt="Episode 1" 
+                             class="w-32 rounded"
+                        >
+                        <div>
+                            <h4 class="font-medium">1. The End's Beginning</h4>
+                            <p class="text-sm text-gray-400">53m</p>
+                            <p class="text-sm mt-2">Hostile townsfolk and a cunning mage greet Geralt in the town of Blaviken.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex space-x-4 cursor-pointer hover:bg-white/10 p-2 rounded transition-colors">
+                        <img src="https://image.tmdb.org/t/p/w500/uDgy6hyPd82kOHh6I95FLtLnj6p.jpg" 
+                             alt="Episode 2" 
+                             class="w-32 rounded"
+                        >
+                        <div>
+                            <h4 class="font-medium">2. Four Marks</h4>
+                            <p class="text-sm text-gray-400">61m</p>
+                            <p class="text-sm mt-2">Geralt helps a cursed knight and meets a powerful sorceress.</p>
+                        </div>
+                    </div>
+                    <!-- More episodes... -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/watch.js"></script>
+</body>
+</html>
