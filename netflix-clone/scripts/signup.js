@@ -1,8 +1,10 @@
-// Form validation and submission
 document.addEventListener('DOMContentLoaded', () => {
     const signupForm = document.getElementById('signup-form');
-    const emailInput = signupForm.querySelector('input[type="email"]');
-    const passwordInput = signupForm.querySelector('input[type="password"]');
+    if (!signupForm) return;
+
+    const emailInput = document.getElementById('email');
+    const nameInput = document.getElementById('name');
+    const passwordInput = document.getElementById('password');
     
     // Email validation
     emailInput.addEventListener('input', (e) => {
@@ -14,7 +16,19 @@ document.addEventListener('DOMContentLoaded', () => {
             showError('Please enter a valid email address.');
         } else {
             emailInput.classList.remove('border-2', 'border-[#e87c03]');
-            removeError();
+            removeMessages();
+        }
+    });
+
+    // Name validation
+    nameInput.addEventListener('input', (e) => {
+        const name = e.target.value;
+        if (name.length < 2 && name !== '') {
+            nameInput.classList.add('border-2', 'border-[#e87c03]');
+            showError('Name should be at least 2 characters.');
+        } else {
+            nameInput.classList.remove('border-2', 'border-[#e87c03]');
+            removeMessages();
         }
     });
 
@@ -26,20 +40,20 @@ document.addEventListener('DOMContentLoaded', () => {
             showError('Password should be at least 6 characters.');
         } else {
             passwordInput.classList.remove('border-2', 'border-[#e87c03]');
-            removeError();
+            removeMessages();
         }
     });
 
     // Form submission
-    signupForm.addEventListener('submit', (e) => {
+    signupForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         
         const email = emailInput.value;
+        const name = nameInput.value;
         const password = passwordInput.value;
-        const wantsOffers = signupForm.querySelector('#offers').checked;
 
         // Basic validation
-        if (!email || !password) {
+        if (!email || !name || !password) {
             showError('Please fill in all required fields.');
             return;
         }
@@ -49,49 +63,66 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Store user data (in a real app, this would be sent to a backend)
-        const userData = {
-            email,
-            password,
-            wantsOffers,
-            createdAt: new Date().toISOString()
-        };
+        // Show loading state
+        const submitButton = signupForm.querySelector('button[type="submit"]');
+        submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Creating account...';
+        submitButton.disabled = true;
 
         try {
-            // Store in localStorage for demo purposes
+            // Get existing users
             const existingUsers = JSON.parse(localStorage.getItem('netflix_users') || '[]');
             
             // Check if email already exists
             if (existingUsers.some(user => user.email === email)) {
                 showError('This email is already registered.');
+                resetButton();
                 return;
             }
 
-            existingUsers.push(userData);
+            // Create new user
+            const newUser = {
+                email,
+                name,
+                password,
+                createdAt: new Date().toISOString()
+            };
+
+            // Add to users list
+            existingUsers.push(newUser);
             localStorage.setItem('netflix_users', JSON.stringify(existingUsers));
 
-            // Auto login after signup
+            // Set auth state
             localStorage.setItem('netflix_auth', JSON.stringify({
                 email,
+                name,
                 isAuthenticated: true
             }));
 
-            // Show success message and redirect
+            // Show success message
             showSuccess('Account created successfully!');
+
+            // Redirect to browse page after a short delay
             setTimeout(() => {
                 window.location.href = 'browse.html';
             }, 1500);
 
         } catch (error) {
-            showError('Something went wrong. Please try again.');
             console.error('Signup error:', error);
+            showError('Something went wrong. Please try again.');
+            resetButton();
         }
     });
+
+    function resetButton() {
+        const submitButton = signupForm.querySelector('button[type="submit"]');
+        submitButton.innerHTML = 'Sign Up';
+        submitButton.disabled = false;
+    }
 });
 
-// Error handling
+// Message handling
 function showError(message) {
-    removeError(); // Remove any existing error
+    removeMessages();
     
     const errorDiv = document.createElement('div');
     errorDiv.className = 'error-message text-[#e87c03] text-sm p-2 mt-2 rounded';
@@ -101,23 +132,23 @@ function showError(message) {
     form.insertBefore(errorDiv, form.querySelector('button'));
 }
 
-function removeError() {
-    const existingError = document.querySelector('.error-message');
-    if (existingError) {
-        existingError.remove();
-    }
-}
-
-// Success message
 function showSuccess(message) {
-    removeError(); // Remove any existing error messages
+    removeMessages();
     
     const successDiv = document.createElement('div');
-    successDiv.className = 'success-message text-green-600 text-sm p-2 mt-2 rounded bg-green-100';
+    successDiv.className = 'success-message text-green-500 text-sm p-2 mt-2 rounded bg-green-100/10';
     successDiv.textContent = message;
 
     const form = document.getElementById('signup-form');
     form.insertBefore(successDiv, form.querySelector('button'));
+}
+
+function removeMessages() {
+    const existingError = document.querySelector('.error-message');
+    if (existingError) existingError.remove();
+    
+    const existingSuccess = document.querySelector('.success-message');
+    if (existingSuccess) existingSuccess.remove();
 }
 
 // Check if user is already logged in
@@ -134,22 +165,3 @@ function checkAuthState() {
 
 // Check auth state when page loads
 checkAuthState();
-
-// Add loading state to signup button
-const signupButton = document.querySelector('button[type="submit"]');
-if (signupButton) {
-    signupButton.addEventListener('click', () => {
-        if (document.getElementById('signup-form').checkValidity()) {
-            signupButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Creating account...';
-            signupButton.disabled = true;
-            
-            // Reset button after 2 seconds if signup fails
-            setTimeout(() => {
-                if (signupButton.disabled) {
-                    signupButton.innerHTML = 'Next';
-                    signupButton.disabled = false;
-                }
-            }, 2000);
-        }
-    });
-}
