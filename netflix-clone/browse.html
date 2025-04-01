@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix - Browse</title>
+    <link rel="icon" type="image/x-icon" href="https://assets.nflxext.com/us/ffe/siteui/common/icons/nficon2016.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-[#141414] text-white font-['Roboto']">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 transition-all duration-500 bg-gradient-to-b from-black to-transparent">
+        <div class="max-w-[1800px] mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Left Nav -->
+                <div class="flex items-center space-x-8">
+                    <a href="browse.html">
+                        <svg viewBox="0 0 111 30" class="w-24 h-8 text-[#e50914] fill-current">
+                            <g id="netflix-logo">
+                                <path d="M105.06233,14.2806261 L110.999156,30 C109.249227,29.7497422 107.500234,29.4366857 105.718437,29.1554972 L102.374168,20.4686475 L98.9371075,28.4375293 C97.2499766,28.1563408 95.5928391,28.061674 93.9057081,27.8432843 L99.9372012,14.0931671 L94.4680851,-5.68434189e-14 L99.5313525,-5.68434189e-14 L102.593495,7.87421502 L105.874965,-5.68434189e-14 L110.999156,-5.68434189e-14 L105.06233,14.2806261 Z M90.4686475,-5.68434189e-14 L85.8749649,-5.68434189e-14 L85.8749649,27.2499766 C87.3746368,27.3437061 88.9371075,27.4055675 90.4686475,27.5930265 L90.4686475,-5.68434189e-14 Z M81.9055207,26.93692 C77.7186241,26.6557316 73.5307901,26.4064111 69.250164,26.3117443 L69.250164,-5.68434189e-14 L73.9366389,-5.68434189e-14 L73.9366389,21.8745899 C76.6248008,21.9373887 79.3120255,22.1557784 81.9055207,22.2804387 L81.9055207,26.93692 Z M64.2496954,10.6561065 L64.2496954,15.3435186 L57.8442216,15.3435186 L57.8442216,25.9996251 L53.2186709,25.9996251 L53.2186709,-5.68434189e-14 L66.3436123,-5.68434189e-14 L66.3436123,4.68741213 L57.8442216,4.68741213 L57.8442216,10.6561065 L64.2496954,10.6561065 Z M45.3435186,4.68741213 L45.3435186,26.2498828 C43.7810479,26.2498828 42.1876465,26.2498828 40.6561065,26.3117443 L40.6561065,4.68741213 L35.8121661,4.68741213 L35.8121661,-5.68434189e-14 L50.2183897,-5.68434189e-14 L50.2183897,4.68741213 L45.3435186,4.68741213 Z M30.749836,15.5928391 C28.687787,15.5928391 26.2498828,15.5928391 24.4999531,15.6875059 L24.4999531,22.6562939 C27.2499766,22.4678976 30,22.2495079 32.7809542,22.1557784 L32.7809542,26.6557316 L19.812541,27.6876933 L19.812541,-5.68434189e-14 L32.7809542,-5.68434189e-14 L32.7809542,4.68741213 L24.4999531,4.68741213 L24.4999531,10.9991564 C26.3126816,10.9991564 29.0936358,10.9054269 30.749836,10.9054269 L30.749836,15.5928391 Z M4.78114163,12.9684132 L4.78114163,29.3429562 C3.09401069,29.5313525 1.59340144,29.7497422 0,30 L0,-5.68434189e-14 L4.4690224,-5.68434189e-14 L10.562377,17.0315868 L10.562377,-5.68434189e-14 L15.2497891,-5.68434189e-14 L15.2497891,28.061674 C13.5935889,28.3437998 11.906458,28.4375293 10.1246602,28.6868498 L4.78114163,12.9684132 Z"></path>
+                            </g>
+                        </svg>
+                    </a>
+                    <div class="hidden md:flex space-x-4">
+                        <a href="#" class="text-white hover:text-gray-300">Home</a>
+                        <a href="#" class="text-gray-300 hover:text-white">TV Shows</a>
+                        <a href="#" class="text-gray-300 hover:text-white">Movies</a>
+                        <a href="#" class="text-gray-300 hover:text-white">New & Popular</a>
+                        <a href="#" class="text-gray-300 hover:text-white">My List</a>
+                    </div>
+                </div>
+
+                <!-- Right Nav -->
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <input type="text" 
+                               placeholder="Titles, people, genres" 
+                               class="bg-black/60 text-white px-4 py-2 rounded border border-white/20 focus:outline-none focus:border-white transition-colors hidden md:block"
+                        >
+                    </div>
+                    <a href="#" class="text-gray-300 hover:text-white"><i class="fas fa-bell"></i></a>
+                    <div class="relative group">
+                        <button class="flex items-center space-x-2">
+                            <img src="https://occ-0-2590-2186.1.nflxso.net/dnm/api/v6/K6hjPJd6cR6FpVELC5Pd6ovHRSk/AAAABbme8JMz4rEKFJhtzpOKWFJ_6qX-0y5wwWyYvBhWS0VKFLa289dZ5zvRBggmFVWVPL2AAYE8xevD4jjLZjWumNo.png?r=a41" 
+                                 alt="Profile" 
+                                 class="w-8 h-8 rounded"
+                            >
+                            <i class="fas fa-caret-down text-white group-hover:rotate-180 transition-transform"></i>
+                        </button>
+                        <div class="absolute right-0 mt-2 w-48 bg-black/90 border border-white/10 rounded shadow-lg hidden group-hover:block">
+                            <div class="py-2">
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-white/10">Account</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-white/10">Help Center</a>
+                                <a href="#" id="signout-button" class="block px-4 py-2 text-sm text-gray-300 hover:text-white hover:bg-white/10">Sign out of Netflix</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Featured Content -->
+    <header class="relative h-[80vh] flex items-end" style="background: linear-gradient(to top, #141414, transparent), url('https://image.tmdb.org/t/p/original/uDgy6hyPd82kOHh6I95FLtLnj6p.jpg') center/cover;">
+        <div class="max-w-[1800px] mx-auto px-4 pb-24 w-full">
+            <div class="max-w-xl">
+                <h1 class="text-6xl font-bold mb-4">The Witcher</h1>
+                <p class="text-lg mb-4">Geralt of Rivia, a solitary monster hunter, struggles to find his place in a world where people often prove more wicked than beasts.</p>
+                <div class="flex space-x-4">
+                    <button class="bg-white text-black px-8 py-2 rounded flex items-center hover:bg-white/90 transition-colors">
+                        <i class="fas fa-play mr-2"></i> Play
+                    </button>
+                    <button class="bg-gray-500/70 text-white px-8 py-2 rounded flex items-center hover:bg-gray-500/50 transition-colors">
+                        <i class="fas fa-info-circle mr-2"></i> More Info
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Content Rows -->
+    <main class="relative z-10 -mt-32 pb-16">
+        <!-- Trending Now -->
+        <section class="content-section mb-8">
+            <div class="max-w-[1800px] mx-auto px-4">
+                <h2 class="text-xl font-medium mb-4">Trending Now</h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+                    <!-- Movie Items -->
+                    <div class="movie-item relative group">
+                        <img src="https://image.tmdb.org/t/p/w500/uDgy6hyPd82kOHh6I95FLtLnj6p.jpg" 
+                             alt="Movie" 
+                             class="w-full rounded transition-transform duration-300 group-hover:scale-110"
+                        >
+                        <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <button class="bg-white text-black p-2 rounded-full">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Repeat movie items -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Popular on Netflix -->
+        <section class="content-section mb-8">
+            <div class="max-w-[1800px] mx-auto px-4">
+                <h2 class="text-xl font-medium mb-4">Popular on Netflix</h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+                    <!-- Movie Items -->
+                    <div class="movie-item relative group">
+                        <img src="https://image.tmdb.org/t/p/w500/7vjaCdMw15FEbXyLQTVa04URsPm.jpg" 
+                             alt="Movie" 
+                             class="w-full rounded transition-transform duration-300 group-hover:scale-110"
+                        >
+                        <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <button class="bg-white text-black p-2 rounded-full">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Repeat movie items -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Continue Watching -->
+        <section class="content-section">
+            <div class="max-w-[1800px] mx-auto px-4">
+                <h2 class="text-xl font-medium mb-4">Continue Watching</h2>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+                    <!-- Movie Items -->
+                    <div class="movie-item relative group">
+                        <img src="https://image.tmdb.org/t/p/w500/rktDFPbfHfUbArZ6OOOKsXcv0Bm.jpg" 
+                             alt="Movie" 
+                             class="w-full rounded transition-transform duration-300 group-hover:scale-110"
+                        >
+                        <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <button class="bg-white text-black p-2 rounded-full">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 h-1 bg-gray-600">
+                            <div class="h-full w-[45%] bg-red-600"></div>
+                        </div>
+                    </div>
+                    <!-- Repeat movie items -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="scripts/browse.js"></script>
+</body>
+</html>
