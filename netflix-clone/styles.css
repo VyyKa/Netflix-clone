@@ -1,0 +1,115 @@
+/* Custom styles to complement Tailwind CSS */
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* FAQ accordion animations */
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+.faq-answer.active {
+    max-height: 1000px;
+    transition: max-height 0.5s ease-in;
+}
+
+/* Rotate plus icon when FAQ is active */
+.faq-button .fa-plus {
+    transition: transform 0.3s ease;
+}
+
+.faq-button.active .fa-plus {
+    transform: rotate(45deg);
+}
+
+/* Gradient overlay for background images */
+.hero-gradient {
+    background: rgba(0, 0, 0, 0.4);
+    background-image: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.8) 0,
+        rgba(0, 0, 0, 0) 60%,
+        rgba(0, 0, 0, 0.8) 100%
+    );
+}
+
+/* Netflix card animation */
+.download-animation {
+    animation: downloadProgress 3s infinite;
+}
+
+@keyframes downloadProgress {
+    0% { width: 0%; }
+    50% { width: 100%; }
+    100% { width: 0%; }
+}
+
+/* Responsive video container */
+.video-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.video-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Input focus styles */
+input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #e50914;
+}
+
+/* Button hover effect */
+.netflix-button {
+    transition: background-color 0.2s ease;
+}
+
+.netflix-button:hover {
+    background-color: #f40612;
+}
+
+/* Language selector custom styling */
+select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FFFFFF%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.7rem top 50%;
+    background-size: 0.65rem auto;
+    padding-right: 2rem;
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+    
+    .hero h2 {
+        font-size: 1.5rem;
+    }
+    
+    .feature-section h2 {
+        font-size: 2rem;
+    }
+    
+    .feature-section p {
+        font-size: 1.2rem;
+    }
+}
+
+/* Loading animation for images */
+img {
+    opacity: 0;
+    transition: opacity 0.3s ease-in;
+}
+
+img.loaded {
+    opacity: 1;
+}
