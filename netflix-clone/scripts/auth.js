@@ -1,12 +1,6 @@
-// Mock user data (in a real app, this would be handled by a backend)
-const mockUsers = [
-    { email: 'test@example.com', password: 'password123' }
-];
-
-// Form validation and submission
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('login-form');
-    if (!loginForm) return; // Exit if form not found
+    if (!loginForm) return;
 
     const emailInput = loginForm.querySelector('input[type="email"]');
     const passwordInput = loginForm.querySelector('input[type="password"]');
@@ -47,12 +41,20 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        // Get users from localStorage
+        const users = JSON.parse(localStorage.getItem('netflix_users') || '[]');
+        
         // Check credentials
-        const user = mockUsers.find(u => u.email === email && u.password === password);
+        const user = users.find(u => u.email === email && u.password === password);
         
         if (user) {
             // Store auth state
-            const authData = { email, isAuthenticated: true };
+            const authData = {
+                email: user.email,
+                name: user.name,
+                isAuthenticated: true
+            };
+
             if (rememberMe) {
                 localStorage.setItem('netflix_auth', JSON.stringify(authData));
             } else {
@@ -119,4 +121,23 @@ if (rememberMeCheckbox) {
     if (remembered) {
         rememberMeCheckbox.checked = true;
     }
+}
+
+// Add loading state to sign in button
+const signInButton = document.querySelector('button[type="submit"]');
+if (signInButton) {
+    signInButton.addEventListener('click', () => {
+        if (document.getElementById('login-form').checkValidity()) {
+            signInButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Signing in...';
+            signInButton.disabled = true;
+            
+            // Reset button after 2 seconds if login fails
+            setTimeout(() => {
+                if (signInButton.disabled) {
+                    signInButton.innerHTML = 'Sign In';
+                    signInButton.disabled = false;
+                }
+            }, 2000);
+        }
+    });
 }
